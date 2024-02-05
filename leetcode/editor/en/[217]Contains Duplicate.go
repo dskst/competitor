@@ -30,6 +30,8 @@ func containsDuplicate(nums []int) bool {
 		if !m[v] {
 			m[v] = true
 			uniq = append(uniq, v)
+		} else {
+			return true
 		}
 	}
 	return len(nums) != len(uniq)
