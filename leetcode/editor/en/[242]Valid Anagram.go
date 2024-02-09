@@ -29,40 +29,56 @@
 
 package main
 
-import (
-	"sort"
-	"strings"
-)
-
 // leetcode submit region begin(Prohibit modification and deletion)
 func isAnagram(s string, t string) bool {
-	rs := []rune(s)
-	rt := []rune(t)
+	// first try
+	//rs := []rune(s)
+	//rt := []rune(t)
+	//
+	//ls := len(rs)
+	//lt := len(rt)
+	//if ls != lt {
+	//	return false
+	//}
+	//
+	//ss := make([]string, 0, ls)
+	//st := make([]string, 0, lt)
+	//for i := 0; i < ls; i++ {
+	//	if i+1 < ls && i+1 < lt {
+	//		ss = append(ss, string(rs[i:(i+1)]))
+	//		st = append(st, string(rt[i:(i+1)]))
+	//	} else {
+	//		ss = append(ss, string(rs[i:]))
+	//		st = append(st, string(rt[i:]))
+	//	}
+	//}
+	//
+	//sort.Strings(ss)
+	//sort.Strings(st)
+	//if strings.Join(ss, "") == strings.Join(st, "") {
+	//	return true
+	//}
+	//return false
 
-	ls := len(rs)
-	lt := len(rt)
-	if ls != lt {
+	// example
+	if len(s) != len(t) {
 		return false
 	}
 
-	ss := make([]string, 0, ls)
-	st := make([]string, 0, lt)
-	for i := 0; i < ls; i++ {
-		if i+1 < ls && i+1 < lt {
-			ss = append(ss, string(rs[i:(i+1)]))
-			st = append(st, string(rt[i:(i+1)]))
-		} else {
-			ss = append(ss, string(rs[i:]))
-			st = append(st, string(rt[i:]))
+	var freq [26]int
+
+	for idx := 0; idx < len(s); idx++ {
+		freq[s[idx]-'a']++
+		freq[t[idx]-'a']--
+	}
+
+	for idx := 0; idx < len(freq); idx++ {
+		if freq[idx] != 0 {
+			return false
 		}
 	}
 
-	sort.Strings(ss)
-	sort.Strings(st)
-	if strings.Join(ss, "") == strings.Join(st, "") {
-		return true
-	}
-	return false
+	return true
 }
 
 //leetcode submit region end(Prohibit modification and deletion)

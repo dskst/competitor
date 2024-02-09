@@ -23,18 +23,36 @@ package main
 
 // leetcode submit region begin(Prohibit modification and deletion)
 func containsDuplicate(nums []int) bool {
-	m := make(map[int]bool)
-	var uniq []int
+	// first try
+	//m := make(map[int]bool)
+	//var uniq []int
+	//
+	//for _, v := range nums {
+	//	if !m[v] {
+	//		m[v] = true
+	//		uniq = append(uniq, v)
+	//	} else {
+	//		return true
+	//	}
+	//}
+	//return len(nums) != len(uniq)
+
+	// example
+	if len(nums) <= 1 {
+		return false
+	}
+
+	xm := make(map[int]struct{})
 
 	for _, v := range nums {
-		if !m[v] {
-			m[v] = true
-			uniq = append(uniq, v)
-		} else {
+		if _, ok := xm[v]; ok {
 			return true
 		}
+
+		xm[v] = struct{}{}
 	}
-	return len(nums) != len(uniq)
+
+	return false
 }
 
 //leetcode submit region end(Prohibit modification and deletion)
