@@ -32,7 +32,7 @@ package main
 // leetcode submit region begin(Prohibit modification and deletion)
 func topKFrequent(nums []int, k int) []int {
 	freq := make(map[int]int)
-	cnt := make(map[int][]int, len(nums))
+	cnt := make(map[int][]int, len(nums)+1)
 	var r []int
 
 	for _, num := range nums {
@@ -44,9 +44,7 @@ func topKFrequent(nums []int, k int) []int {
 	}
 
 	for i := len(nums); i > 0; i-- {
-		if len(cnt[i]) > 0 {
-			r = append(r, cnt[i]...)
-		}
+		r = append(r, cnt[i]...)
 		if len(r) == k {
 			break
 		}
