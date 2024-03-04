@@ -36,20 +36,21 @@ package main
 
 // leetcode submit region begin(Prohibit modification and deletion)
 func productExceptSelf(nums []int) []int {
-	answers := make([]int, 0, len(nums))
+	res := make([]int, len(nums))
 
-	for i := 0; i < len(nums); i++ {
-		answer := 1
-		for idx, num := range nums {
-			if idx == i {
-				continue
-			}
-			answer *= num
-		}
-		answers = append(answers, answer)
+	prefix := 1
+	for i, num := range nums {
+		res[i] = prefix
+		prefix *= num
 	}
 
-	return answers
+	postfix := 1
+	for i := len(nums) - 1; i >= 0; i-- {
+		res[i] *= postfix
+		postfix *= nums[i]
+	}
+
+	return res
 }
 
 //leetcode submit region end(Prohibit modification and deletion)
