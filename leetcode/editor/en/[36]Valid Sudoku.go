@@ -83,11 +83,14 @@ func isValidSudoku(board [][]byte) bool {
 					return false
 				}
 			}
+			rows[r] = append(rows[r], board[r][c])
+
 			for _, v := range cols[c] {
 				if v == board[r][c] {
 					return false
 				}
 			}
+			cols[c] = append(cols[c], board[r][c])
 
 			key := (r/3)*3 + c/3
 			for _, v := range squares[key] {
@@ -95,9 +98,6 @@ func isValidSudoku(board [][]byte) bool {
 					return false
 				}
 			}
-
-			cols[c] = append(cols[c], board[r][c])
-			rows[r] = append(rows[r], board[r][c])
 			squares[key] = append(squares[key], board[r][c])
 		}
 	}
